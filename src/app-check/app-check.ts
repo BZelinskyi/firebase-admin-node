@@ -88,7 +88,7 @@ export class AppCheck {
     this.validateVerifyAppCheckTokenOptions(options);
     return this.appCheckTokenVerifier.verifyToken(appCheckToken)
       .then((decodedToken) => {
-        if (options?.consume) {
+        if (options && options.consume) {
           return this.client.verifyReplayProtection(appCheckToken)
             .then((alreadyConsumed) => {
               return {

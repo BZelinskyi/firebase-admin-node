@@ -110,7 +110,7 @@ export class FirebaseNamespace {
   /* tslint:enable */
 
   constructor(appStore?: AppStore) {
-    this.INTERNAL = new FirebaseNamespaceInternals(appStore ?? new AppStore());
+    this.INTERNAL = new FirebaseNamespaceInternals(appStore || new AppStore());
   }
 
   /**

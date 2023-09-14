@@ -203,7 +203,7 @@ export class Tenant {
     }
     if (typeof tenantOptions.testPhoneNumbers !== 'undefined') {
       // null will clear existing test phone numbers. Translate to empty object.
-      request.testPhoneNumbers = tenantOptions.testPhoneNumbers ?? {};
+      request.testPhoneNumbers = tenantOptions.testPhoneNumbers ? tenantOptions.testPhoneNumbers : {};
     }
     if (typeof tenantOptions.smsRegionConfig !== 'undefined') {
       request.smsRegionConfig = tenantOptions.smsRegionConfig;

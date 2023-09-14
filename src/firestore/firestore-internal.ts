@@ -56,8 +56,8 @@ export class FirestoreService {
   initializeDatabase(databaseId: string, settings: FirestoreSettings): Firestore {
     const existingInstance = this.databases.get(databaseId);
     if (existingInstance) {
-      const initialSettings = this.firestoreSettings.get(databaseId) ?? {};
-      if (this.checkIfSameSettings(settings, initialSettings)) {
+      const initialSettings = this.firestoreSettings.get(databaseId) ? this.firestoreSettings.get(databaseId) : {};
+      if (initialSettings && this.checkIfSameSettings(settings, initialSettings)) {
         return existingInstance;
       }
       throw new FirebaseFirestoreError({
@@ -85,8 +85,8 @@ export class FirestoreService {
   }
 
   private checkIfSameSettings(settingsA: FirestoreSettings, settingsB: FirestoreSettings): boolean {
-    const a = settingsA ?? {};
-    const b = settingsB ?? {};
+    const a = settingsA ? settingsA : {};
+    const b = settingsB ? settingsB : {};
     // If we start passing more settings to Firestore constructor,
     // replace this with deep equality check.
     return (a.preferRest === b.preferRest);

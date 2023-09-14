@@ -67,7 +67,7 @@ export class ExtensionsApiClient {
   }
 
   private getExtensionsApiUri(): string {
-    return process.env['FIREBASE_EXT_URL'] ?? EXTENSIONS_URL;
+    return process.env['FIREBASE_EXT_URL'] ? process.env['FIREBASE_EXT_URL'] : EXTENSIONS_URL;
   }
 
   private getRuntimeDataUri(projectId: string, instanceId: string): string {

@@ -155,6 +155,6 @@ export class EventarcApiClient {
   }
 
   private getEventarcHost(): string {
-    return process.env.CLOUD_EVENTARC_EMULATOR_HOST ?? EVENTARC_API;
+    return process.env.CLOUD_EVENTARC_EMULATOR_HOST ? process.env.CLOUD_EVENTARC_EMULATOR_HOST : EVENTARC_API;
   }
 }

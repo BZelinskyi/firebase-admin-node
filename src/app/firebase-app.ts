@@ -219,7 +219,9 @@ export class FirebaseApp implements App {
     // Also remove the instance from the AppStore. This is needed to support the existing
     // app.delete() use case. In the future we can remove this API, and deleteApp() will
     // become the only way to tear down an App.
-    this.appStore?.removeApp(this.name);
+    if (this.appStore) {
+      this.appStore.removeApp(this.name);
+    }
 
     return Promise.all(Object.keys(this.services_).map((serviceName) => {
       const service = this.services_[serviceName];

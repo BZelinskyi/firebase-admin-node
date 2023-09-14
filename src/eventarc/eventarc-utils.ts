@@ -41,7 +41,7 @@ export class FirebaseEventarcError extends PrefixedFirebaseError {
 }
 
 export function toCloudEventProtoFormat(ce: CloudEvent): any {
-  const source = ce.source ?? process.env.EVENTARC_CLOUD_EVENT_SOURCE;
+  const source = ce.source ? ce.source : process.env.EVENTARC_CLOUD_EVENT_SOURCE;
   if (typeof source === 'undefined' || !validator.isNonEmptyString(source)) {
     throw new FirebaseEventarcError('invalid-argument', "CloudEvent 'source' is required.");
   }
@@ -50,9 +50,9 @@ export function toCloudEventProtoFormat(ce: CloudEvent): any {
   }
   const out: Record<string, any> = {
     '@type': 'type.googleapis.com/io.cloudevents.v1.CloudEvent',
-    'id': ce.id ?? uuid(),
+    'id': ce.id ? ce.id : uuid(),
     'type': ce.type,
-    'specVersion': ce.specversion ?? '1.0',
+    'specVersion': ce.specversion ? ce.specversion : '1.0',
     'source': source
   }
 

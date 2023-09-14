@@ -205,8 +205,14 @@ export function initializeFirestore(
   settings?: FirestoreSettings,
   databaseId?: string
 ): Firestore {
-  settings ??= {};
-  databaseId ??= DEFAULT_DATABASE_ID;
+  if (settings === null || settings === undefined) {
+    settings = {};
+  }  
+  
+  if (databaseId === null || databaseId === undefined) {
+    databaseId = DEFAULT_DATABASE_ID
+  }
+  
   const firebaseApp: FirebaseApp = app as FirebaseApp;
   const firestoreService = firebaseApp.getOrInitService(
     'firestore', (app) => new FirestoreService(app));
